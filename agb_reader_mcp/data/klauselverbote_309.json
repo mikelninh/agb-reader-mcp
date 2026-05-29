@@ -1,0 +1,179 @@
+{
+  "_doc": "§ 309 BGB Klauselverbote OHNE Wertungsmöglichkeit — die 13 explicit verbotenen AGB-Klauseltypen. Jede Klausel die hier reinfällt ist unwirksam, ohne Ausnahme, ohne Abwägung. Detection per Pattern-Match auf typische Formulierungen. Source: § 309 BGB i.d.F. 2026.",
+  "schema_version": "1.0",
+  "verbote": [
+    {
+      "nr": "1",
+      "title": "Kurzfristige Preiserhöhungen",
+      "rule": "Eine Bestimmung, welche die Erhöhung des Entgelts für Waren oder Leistungen vorsieht, die innerhalb von vier Monaten nach Vertragsschluss geliefert oder erbracht werden sollen.",
+      "patterns": [
+        "preiserhöhung", "preise.*ändern", "preise.*anpassen", "preis.*anpassung",
+        "anpassung der preise", "einseitig.*preis", "verkäufer.*preis.*ändern"
+      ],
+      "negative_indicator": ["nach 4 monaten", "nach vier monaten", "ab 4. monat"],
+      "severity": "unwirksam_ohne_abwägung"
+    },
+    {
+      "nr": "2",
+      "title": "Leistungsverweigerungsrechte",
+      "rule": "Eine Bestimmung, durch welche das Leistungsverweigerungsrecht, das dem Vertragspartner des Verwenders nach § 320 zusteht, ausgeschlossen oder eingeschränkt wird.",
+      "patterns": [
+        "leistungsverweigerungsrecht.*ausgeschlossen",
+        "leistungsverweigerung.*nicht zulässig",
+        "kein recht.*leistung.*verweigern",
+        "§ 320.*ausgeschlossen"
+      ],
+      "severity": "unwirksam_ohne_abwägung"
+    },
+    {
+      "nr": "3",
+      "title": "Aufrechnungsverbot",
+      "rule": "Eine Bestimmung, durch die dem Vertragspartner des Verwenders die Befugnis genommen wird, mit einer unbestrittenen oder rechtskräftig festgestellten Forderung aufzurechnen.",
+      "patterns": [
+        "aufrechnung.*ausgeschlossen", "aufrechnung.*nicht zulässig",
+        "kein.*aufrechnungsrecht", "aufrechnung.*untersagt",
+        "der kunde kann nicht aufrechnen"
+      ],
+      "severity": "unwirksam_ohne_abwägung"
+    },
+    {
+      "nr": "4",
+      "title": "Mahnung, Fristsetzung",
+      "rule": "Eine Bestimmung, durch die der Verwender von der gesetzlichen Obliegenheit befreit wird, den Vertragspartner zu mahnen oder ihm eine Frist zu setzen.",
+      "patterns": [
+        "ohne mahnung", "keine mahnung erforderlich",
+        "ohne fristsetzung", "keine frist.*setzen",
+        "verzug.*ohne mahnung"
+      ],
+      "severity": "unwirksam_ohne_abwägung"
+    },
+    {
+      "nr": "5",
+      "title": "Pauschalierung von Schadensersatzansprüchen",
+      "rule": "Eine Bestimmung, durch die ein Anspruch des Verwenders auf Schadensersatz pauschalisiert wird, soweit a) die Pauschale den nach gewöhnlichem Verlauf zu erwartenden Schaden übersteigt oder b) dem Vertragspartner der Nachweis nicht zugelassen wird, ein Schaden sei niedriger als die Pauschale.",
+      "patterns": [
+        "pauschal.*schadensersatz",
+        "pauschalisierte.*schaden",
+        "pauschale.*€\\s*\\d+",
+        "schadensersatz.*pauschal"
+      ],
+      "negative_indicator": ["nachweis.*gering", "nachweis.*niedriger", "geringerer schaden.*unbenommen"],
+      "severity": "unwirksam_ohne_abwägung"
+    },
+    {
+      "nr": "6",
+      "title": "Vertragsstrafe",
+      "rule": "Eine Bestimmung, durch die dem Verwender für den Fall der Nichtabnahme oder verspäteten Abnahme der Leistung, des Zahlungsverzugs oder für den Fall, dass der andere Vertragsteil sich vom Vertrag löst, Zahlung einer Vertragsstrafe versprochen wird.",
+      "patterns": [
+        "vertragsstrafe",
+        "konventionalstrafe",
+        "vertragsstrafe.*zahlen",
+        "pönale"
+      ],
+      "severity": "unwirksam_ohne_abwägung"
+    },
+    {
+      "nr": "7",
+      "title": "Haftungsausschluss bei Verletzung von Leben, Körper, Gesundheit",
+      "rule": "Ein Ausschluss oder eine Begrenzung der Haftung für Schäden aus der Verletzung des Lebens, des Körpers oder der Gesundheit, die auf einer fahrlässigen Pflichtverletzung des Verwenders beruhen.",
+      "patterns": [
+        "haftung.*körper",
+        "haftung.*gesundheit",
+        "haftung.*verletzung",
+        "haftungsausschluss.*leben",
+        "schadensersatz.*körperverletzung",
+        "verletzung.*körper.*ausgeschlossen",
+        "verletzung.*gesundheit.*ausgeschlossen"
+      ],
+      "severity": "unwirksam_ohne_abwägung"
+    },
+    {
+      "nr": "7a",
+      "title": "Haftungsausschluss bei grobem Verschulden",
+      "rule": "Ein Ausschluss oder eine Begrenzung der Haftung für sonstige Schäden, die auf einer grob fahrlässigen Pflichtverletzung des Verwenders oder auf einer vorsätzlichen oder grob fahrlässigen Pflichtverletzung eines gesetzlichen Vertreters oder Erfüllungsgehilfen des Verwenders beruhen.",
+      "patterns": [
+        "haftung.*ausgeschlossen.*grobe fahrlässigkeit",
+        "haftung.*ausgeschlossen.*vorsatz",
+        "haftungsausschluss.*grob",
+        "kein.*schadensersatz.*vorsätzlich",
+        "haftung.*beschränkt.*vorsatz"
+      ],
+      "severity": "unwirksam_ohne_abwägung"
+    },
+    {
+      "nr": "8",
+      "title": "Sonstige Haftungsausschlüsse bei Pflichtverletzung",
+      "rule": "Eine Bestimmung, durch die bei einer Verletzung wesentlicher Vertragspflichten (Kardinalpflichten) die Haftung auf die Verletzung dieser Pflicht beschränkt wird, oder durch die das Recht des Vertragspartners zum Rücktritt oder zum Schadensersatz statt der Leistung bei Pflichtverletzungen ausgeschlossen wird.",
+      "patterns": [
+        "haftung.*nur.*vorsatz",
+        "kein rücktrittsrecht.*pflichtverletzung",
+        "haftung.*ausgeschlossen.*pflichtverletzung",
+        "schadensersatz statt der leistung.*ausgeschlossen"
+      ],
+      "severity": "unwirksam_ohne_abwägung"
+    },
+    {
+      "nr": "9",
+      "title": "Laufzeit bei Dauerschuldverhältnissen",
+      "rule": "Bei einem Vertragsverhältnis, das die regelmäßige Lieferung von Waren oder die regelmäßige Erbringung von Dienst- oder Werkleistungen zum Gegenstand hat, eine den anderen Vertragsteil länger als zwei Jahre bindende Laufzeit oder eine den anderen Vertragsteil bindende stillschweigende Verlängerung des Vertragsverhältnisses um jeweils mehr als ein Jahr.",
+      "patterns": [
+        "mindestlaufzeit.*\\d+ jahre?",
+        "laufzeit.*\\d+ jahre?",
+        "automatische verlängerung.*jahr",
+        "stillschweigende verlängerung",
+        "vertrag verlängert sich.*jahr"
+      ],
+      "context_check": "extract_duration_years",
+      "max_allowed_initial_years": 2,
+      "max_allowed_renewal_years": 1,
+      "severity": "unwirksam_wenn_dauer_zu_lang"
+    },
+    {
+      "nr": "10",
+      "title": "Wechsel des Vertragspartners",
+      "rule": "Eine Bestimmung, wonach bei Kauf-, Darlehens-, Dienst- oder Werkverträgen ein Dritter anstelle des Verwenders in die sich aus dem Vertrag ergebenden Rechte und Pflichten eintritt oder eintreten kann.",
+      "patterns": [
+        "vertragspartner.*wechseln",
+        "andere gesellschaft.*eintreten",
+        "vertragsübernahme.*durch dritte",
+        "übergang.*auf dritte"
+      ],
+      "severity": "unwirksam_ohne_abwägung"
+    },
+    {
+      "nr": "11",
+      "title": "Haftung des Abschlussvertreters",
+      "rule": "Eine Bestimmung, durch die der Verwender einem Vertreter, der den Vertrag für den anderen Vertragsteil abschließt, die Haftung für vorsätzliches oder grob fahrlässiges Verhalten auferlegt.",
+      "patterns": [
+        "vertreter.*haftet.*vorsatz",
+        "vertreter.*haftung",
+        "abschlussvertreter.*haftung"
+      ],
+      "severity": "unwirksam_ohne_abwägung"
+    },
+    {
+      "nr": "12",
+      "title": "Beweislast",
+      "rule": "Eine Bestimmung, durch die der Verwender die Beweislast zum Nachteil des anderen Vertragsteils ändert.",
+      "patterns": [
+        "beweislast.*kunde",
+        "kunde.*muss beweisen",
+        "kunde trägt die beweislast"
+      ],
+      "severity": "unwirksam_ohne_abwägung"
+    },
+    {
+      "nr": "13",
+      "title": "Form von Anzeigen und Erklärungen",
+      "rule": "Eine Bestimmung, durch die Anzeigen oder Erklärungen, die dem Verwender oder einem Dritten gegenüber abzugeben sind, an eine strengere Form als die Schriftform oder an besondere Zugangserfordernisse gebunden werden.",
+      "patterns": [
+        "nur per einschreiben",
+        "ausschließlich per post",
+        "nur schriftlich.*per einschreiben",
+        "kündigung.*nur einschreiben",
+        "widerruf.*nur per post"
+      ],
+      "severity": "unwirksam_ohne_abwägung"
+    }
+  ]
+}

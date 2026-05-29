@@ -1,0 +1,116 @@
+{
+  "_doc": "§ 308 BGB Klauselverbote MIT Wertungsmöglichkeit — diese 8 Klauseltypen können unwirksam sein wenn die Frist/Dauer/Bedingung im konkreten Fall unangemessen ist. Im Gegensatz zu § 309 brauchen sie Einzelfall-Abwägung. Detection: Pattern + Schwellenwerte.",
+  "schema_version": "1.0",
+  "verbote": [
+    {
+      "nr": "1",
+      "title": "Annahme- und Leistungsfrist",
+      "rule": "Bestimmung, durch die sich der Verwender unangemessen lange oder nicht hinreichend bestimmte Fristen für die Annahme oder Ablehnung eines Angebots oder die Erbringung einer Leistung vorbehält.",
+      "patterns": [
+        "lieferfrist.*\\d+ wochen",
+        "lieferung.*innerhalb von.*\\d+",
+        "annahmefrist.*\\d+",
+        "leistung.*innerhalb von.*tagen?"
+      ],
+      "warning_threshold_days": 30,
+      "severity": "unwirksam_wenn_unangemessen"
+    },
+    {
+      "nr": "1a",
+      "title": "Zahlungsfrist",
+      "rule": "Bestimmung, durch die sich der Verwender für die Bezahlung des Vertragspartners eine unangemessen lange Frist vorbehält. Bei Verbrauchergeschäften: gilt als Indiz, wenn länger als 30 Tage.",
+      "patterns": [
+        "zahlung.*innerhalb von.*\\d+",
+        "zahlungsfrist.*\\d+ tage?",
+        "zahlbar.*\\d+ tage"
+      ],
+      "warning_threshold_days": 30,
+      "severity": "unwirksam_wenn_unangemessen"
+    },
+    {
+      "nr": "2",
+      "title": "Nachfrist",
+      "rule": "Bestimmung, durch die sich der Verwender eine unangemessen lange oder nicht hinreichend bestimmte Frist vorbehält.",
+      "patterns": [
+        "nachfrist.*\\d+ tage",
+        "nachfristsetzung",
+        "angemessene nachfrist"
+      ],
+      "severity": "unwirksam_wenn_unangemessen"
+    },
+    {
+      "nr": "3",
+      "title": "Rücktrittsvorbehalt",
+      "rule": "Vereinbarung eines Rechts des Verwenders, sich ohne sachlich gerechtfertigten und in dem Vertrag angegebenen Grund von seiner Leistungspflicht zu lösen.",
+      "patterns": [
+        "rücktritt.*vorbehalten",
+        "wir können vom vertrag.*zurücktreten",
+        "rücktrittsrecht.*verwender"
+      ],
+      "severity": "unwirksam_wenn_unangemessen"
+    },
+    {
+      "nr": "4",
+      "title": "Änderungsvorbehalt",
+      "rule": "Vereinbarung eines Rechts des Verwenders, die versprochene Leistung zu ändern oder von ihr abzuweichen, wenn nicht die Vereinbarung der Änderung oder Abweichung unter Berücksichtigung der Interessen des Verwenders für den Vertragspartner zumutbar ist.",
+      "patterns": [
+        "leistung.*ändern",
+        "vorbehalten.*änderung",
+        "wir behalten uns.*ändern",
+        "abweichende ausstattung möglich"
+      ],
+      "severity": "unwirksam_wenn_unangemessen"
+    },
+    {
+      "nr": "5",
+      "title": "Fingierte Erklärungen",
+      "rule": "Bestimmung, wonach eine Erklärung des Vertragspartners des Verwenders bei Vornahme oder Unterlassen einer bestimmten Handlung als von ihm abgegeben oder nicht abgegeben gilt.",
+      "patterns": [
+        "schweigen.*als zustimmung",
+        "gilt als angenommen",
+        "gilt als erklärt",
+        "gilt.*als erteilt",
+        "gilt.*zustimmung",
+        "zustimmung.*als erteilt",
+        "wenn.*nicht.*widersprechen.*gilt",
+        "wenn.*nicht widersprochen.*gilt"
+      ],
+      "severity": "unwirksam_wenn_unangemessen"
+    },
+    {
+      "nr": "6",
+      "title": "Fiktion des Zugangs",
+      "rule": "Bestimmung, die vorsieht, dass eine Erklärung des Verwenders von besonderer Bedeutung dem anderen Teil als zugegangen gilt.",
+      "patterns": [
+        "erklärung gilt als zugegangen",
+        "schreiben gilt.*zugegangen",
+        "absenden.*gilt als zugang"
+      ],
+      "severity": "unwirksam_wenn_unangemessen"
+    },
+    {
+      "nr": "7",
+      "title": "Abwicklung von Verträgen",
+      "rule": "Bestimmung, durch die für den Fall, dass eine Vertragspartei den Vertrag kündigt oder vom Vertrag zurücktritt, der Verwender eine unangemessen hohe Vergütung oder einen unangemessen hohen Ersatz für seine Aufwendungen verlangen kann.",
+      "patterns": [
+        "stornogebühr.*\\d+%",
+        "stornokosten",
+        "bei rücktritt.*pauschal",
+        "aufwendungsersatz.*pauschal"
+      ],
+      "severity": "unwirksam_wenn_unangemessen"
+    },
+    {
+      "nr": "8",
+      "title": "Nichtverfügbarkeit der Leistung",
+      "rule": "Vereinbarung eines Vorbehalts des Verwenders, von seiner Leistungspflicht frei zu werden, wenn die Leistung nicht verfügbar ist (z.B. 'solange Vorrat reicht', ohne Begrenzung).",
+      "patterns": [
+        "solange der vorrat reicht",
+        "vorbehaltlich der verfügbarkeit",
+        "wenn artikel nicht verfügbar",
+        "lieferfähigkeit vorbehalten"
+      ],
+      "severity": "unwirksam_wenn_unangemessen"
+    }
+  ]
+}

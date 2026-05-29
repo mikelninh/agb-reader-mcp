@@ -1,0 +1,73 @@
+{
+  "_doc": "Verbraucherzentrale-style red flags for § 305c (überraschende Klauseln) and § 307 (unangemessene Benachteiligung). Detection per pattern + heuristic. Each entry: pattern → § citation → severity → plain-German explanation.",
+  "schema_version": "1.0",
+  "red_flags": [
+    {
+      "category": "gerichtsstand",
+      "patterns": ["gerichtsstand.*ist", "ausschließlich.*gericht", "zuständig.*gericht.*sitz"],
+      "exclusion_pattern": "wohnsitz",
+      "paragraph": "§ 305c BGB",
+      "severity": "wahrscheinlich_überraschend",
+      "explanation": "Gerichtsstandsklauseln in Verbraucher-AGB sind überraschend und meist unwirksam — Verbraucher dürfen am Wohnsitz klagen (§ 12 ZPO, EuGVVO bei EU). Ausnahme: B2B mit Vollkaufmann."
+    },
+    {
+      "category": "rechtswahl_drittstaat",
+      "patterns": ["recht.*usa", "anwendbar.*kalifornien", "law of.*new york", "schweizer recht"],
+      "exclusion_pattern": "deutsches recht",
+      "paragraph": "§ 305c BGB i.V.m. Rom-I-VO Art. 6",
+      "severity": "wahrscheinlich_überraschend",
+      "explanation": "Rechtswahl zu Lasten eines Verbrauchers zugunsten eines Drittstaat-Rechts ist überraschend. Verbraucher behält Schutz seines Wohnsitz-Rechts (Rom-I-VO Art. 6)."
+    },
+    {
+      "category": "intransparenz",
+      "patterns": [
+        "im einzelfall.*nach billigkeit",
+        "zumutbaren rahmen",
+        "zumutbarem rahmen",
+        "soweit erforderlich",
+        "angemessenem umfang",
+        "sofern.*erforderlich.*entscheiden"
+      ],
+      "paragraph": "§ 307 Abs. 1 S. 2 BGB",
+      "severity": "wahrscheinlich_intransparent",
+      "explanation": "Transparenzgebot verletzt — Verbraucher kann seine Rechte/Pflichten nicht klar erkennen. Unbestimmte Rechtsbegriffe ohne Konkretisierung sind unwirksam."
+    },
+    {
+      "category": "salvatorisch_unwirksam",
+      "patterns": [
+        "salvatorische klausel",
+        "sollte.*unwirksam.*sein",
+        "wenn.*klausel.*unwirksam.*bleiben.*übrigen"
+      ],
+      "paragraph": "§ 306 BGB",
+      "severity": "möglicherweise_überflüssig",
+      "explanation": "§ 306 BGB regelt das gesetzlich bereits — eine 'salvatorische Klausel' ändert in Verbraucher-AGB nichts an der Folge der Unwirksamkeit. Oft Hinweis auf schlechte AGB-Hygiene."
+    },
+    {
+      "category": "agb_änderungsklausel",
+      "patterns": [
+        "wir behalten uns vor.*agb.*ändern",
+        "diese agb können geändert werden",
+        "änderung dieser bedingungen"
+      ],
+      "paragraph": "§ 308 Nr. 4 BGB",
+      "severity": "meist_unwirksam",
+      "explanation": "Einseitige AGB-Änderungsklauseln sind in Verbraucher-AGB fast immer unwirksam — selbst bei Hinweis und Widerspruchsrecht. BGH-Linie zuletzt strenger (BGH XI ZR 26/20 Postbank)."
+    },
+    {
+      "category": "datenschutz_pauschalvergabe",
+      "patterns": [
+        "einverstanden.*werbung",
+        "werbung.*einverstanden",
+        "werbung.*newsletter",
+        "newsletter.*einverstanden",
+        "weitergabe.*partner",
+        "newsletter.*dürfen",
+        "telefonisch.*kontakt"
+      ],
+      "paragraph": "§ 305c BGB i.V.m. § 7 UWG",
+      "severity": "wahrscheinlich_überraschend",
+      "explanation": "Vorab-Einwilligung in Werbung/Datenweitergabe per AGB ist nach DSGVO und § 7 UWG unwirksam — braucht separate, ausdrückliche Opt-in-Erklärung."
+    }
+  ]
+}
