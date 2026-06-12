@@ -13,7 +13,7 @@ dependencies = [
 ]
 
 [project.scripts]
-agb-reader-mcp = "agb-reader_mcp.server:main"
+agb-reader-mcp = "agb_reader_mcp.server:main"
 
 [build-system]
 requires = ["setuptools>=68"]
@@ -21,10 +21,10 @@ build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["agb-reader_mcp*"]
+include = ["agb_reader_mcp*"]
 
 [tool.setuptools.package-data]
-"agb-reader_mcp" = ["data/*.json"]
+"agb_reader_mcp" = ["data/*.json"]
 
 [tool.ruff]
 line-length = 100

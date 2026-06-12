@@ -64,6 +64,12 @@ Add to `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS)
 }
 ```
 
+Or register with Claude Code instead:
+
+```bash
+claude mcp add agb-reader -- agb-reader-mcp
+```
+
 Restart Claude Desktop. Try:
 
 > *"Hier sind die AGB von [Anbieter X]: [text]. Welche Klauseln sind problematisch und warum?"*
